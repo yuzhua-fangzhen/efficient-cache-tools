@@ -1,7 +1,7 @@
 <?php
 
 
-namespace CacheManage\Method;
+namespace Yuzhua\EfficientCacheTools\CacheManage\Method;
 
 class MainCacheManage
 {

@@ -1,10 +1,11 @@
 <?php
 
 
-namespace CacheManage\Method;
+namespace Yuzhua\EfficientCacheTools\CacheManage\Method;
 
 
-use CacheManage\AbstractManage;
+
+use Yuzhua\EfficientCacheTools\CacheManage\AbstractManage;
 
 class File extends AbstractManage
 {

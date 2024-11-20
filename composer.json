@@ -1,0 +1,12 @@
+{
+    "name": "yuzhua/efficient-cache-tools",
+    "description": "The company has internally connected the front-end site management cache toolkit of the operation center console",
+    "type": "package",
+    "autoload": {
+        "psr-4": {
+            "Yuzhua\\EfficientCacheTools\\": "src/"
+        },
+        "files": [ "config/opcache.php" ]
+    },
+    "require": {}
+}

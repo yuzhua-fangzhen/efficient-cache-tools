@@ -3,9 +3,6 @@
 
 namespace CacheManage\Method;
 
-
-use CacheManage\Loader\Loader;
-
 class MainCacheManage
 {
     /**
@@ -31,7 +28,7 @@ class MainCacheManage
         File $fileCacheService
     )
     {
-        $this->config = Loader::loadConfig();
+        $this->config = [];
 
     }
 

@@ -6,6 +6,12 @@ namespace Yuzhua\EfficientCacheTools\CacheManage\Method;
 class MainCacheManage
 {
     /**
+     * 品牌
+     * @var integer
+     */
+    protected $project;
+
+    /**
      * 自定义配置文件
      * @var array|mixed
      */

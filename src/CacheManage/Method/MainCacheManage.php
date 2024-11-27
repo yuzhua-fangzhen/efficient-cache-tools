@@ -3,14 +3,10 @@
 
 namespace Yuzhua\EfficientCacheTools\CacheManage\Method;
 
+use function Yuzhua\EfficientCacheTools\CacheManage\Loader\getPageRoute;
+
 class MainCacheManage
 {
-    /**
-     * 品牌
-     * @var integer
-     */
-    protected $project;
-
     /**
      * 自定义配置文件
      * @var array|mixed
@@ -38,11 +34,17 @@ class MainCacheManage
 
     }
 
-    public function getList($page = 1,$perPage = 10){
+    public function getList($page = 1,$perPage = 10)
+    {
 
     }
 
     public function delete(){
 
+    }
+
+    public static function getPageRoute()
+    {
+        return getPageRoute();
     }
 }

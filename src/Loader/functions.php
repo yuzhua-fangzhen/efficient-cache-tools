@@ -2,14 +2,14 @@
 
 namespace Yuzhua\EfficientCacheTools\Loader;
 
-if (!\function_exists('Yuzhua\EfficientCacheTools\CacheManage\Loader\getCacheName')) {
+if (!\function_exists('Yuzhua\EfficientCacheTools\Loader\getCacheName')) {
     function getCacheName()
     {
 
     }
 }
 
-if (!\function_exists('Yuzhua\EfficientCacheTools\CacheManage\Loader\getPageRoute')) {
+if (!\function_exists('Yuzhua\EfficientCacheTools\Loader\getPageRoute')) {
     function getPageRoute()
     {
         $scriptName = $_SERVER['SCRIPT_NAME'];
@@ -18,7 +18,7 @@ if (!\function_exists('Yuzhua\EfficientCacheTools\CacheManage\Loader\getPageRout
         return $relativePath;
     }
 }
-if (!\function_exists('Yuzhua\EfficientCacheTools\CacheManage\Loader\getDomain')) {
+if (!\function_exists('Yuzhua\EfficientCacheTools\Loader\getDomain')) {
     function getDomain()
     {
         return $_SERVER['HTTP_HOST'];

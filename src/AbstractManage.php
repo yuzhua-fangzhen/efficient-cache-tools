@@ -6,7 +6,5 @@ namespace Yuzhua\EfficientCacheTools;
 
 abstract class AbstractManage
 {
-    abstract protected function store();
-
-    abstract protected function delete();
+    abstract protected function clear($data,$cacheConfig);
 }

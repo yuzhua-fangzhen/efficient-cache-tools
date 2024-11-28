@@ -4,14 +4,14 @@
 namespace Yuzhua\EfficientCacheTools\Interaction;
 
 
-use console\helper\AMQPHelper;
+use Yuzhua\EfficientCacheTools\Method\MainCacheManage;
 
 class QueueConsumer
 {
     /**
      * @var null
      */
-    private $config = null;
+    private $queueConfig = null;
 
     /**
      * @var null
@@ -28,35 +28,31 @@ class QueueConsumer
      */
     private $cacheConfig = null;
 
-    public function __construct($config,$project,$platformClass,$cacheConfig){
+    public function __construct($queueConfig,$cacheConfig,$project,$platformClass){
         set_time_limit(0);
-        $this->config = $config;
+        $queueConfig['queueName'] = sprintf('operation_center.client_cache_manage_clear_project_%s_platform_class_%s.sync.que',$project,$platformClass);
+        $this->queueConfig = $queueConfig;
+        $this->cacheConfig = $cacheConfig;
         $this->project = $project;
         $this->platformClass = $platformClass;
-        $this->cacheConfig = $cacheConfig;
     }
 
     public function consume(){
 
-        $this->syncConsumeByQueue($queueConfig['cache_manage_store_queue'], $exchangeConfig['cache_manage_exchange']);
+        $this->syncConsumeByQueue();
     }
 
-    /**
-     * @param string $queue
-     * @param string $exchange
-     */
-    public function syncConsumeByQueue($queue, $exchange)
+
+    public function syncConsumeByQueue()
     {
         while(true){
             $amqp = null;
             try{
-                $amqp = new AMQPHelper();
+                $amqp = new AMQPHelper($this->queueConfig);
                 $amqp->ttl = 1;
-                $amqp->exchangeName = $exchange;
-                $amqp->queueName = $queue;
                 $amqp->connect();
                 $amqp->consume([$this, 'consumeCallback'], function($message){
-                    yii::warning($message);
+                    //dd($message);
                 });
                 $amqp->disconnect();
             }catch(\Exception $e){
@@ -71,8 +67,16 @@ class QueueConsumer
         }
     }
 
-    public function consumeCallback($data,$redisConfig)
+    public function consumeCallback($data)
     {
+        if(!is_array($data)){
+            $data = json_decode($data,true);
+        }
 
+        if($data['project'] == $this->project && $data['platform_class'] == $this->platformClass){
+            MainCacheManage::getCacheDirver($data['driver_type'])->clear($data,$this->cacheConfig);
+        }
+
+        return true;
     }
 }

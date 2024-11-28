@@ -7,6 +7,25 @@ namespace Yuzhua\EfficientCacheTools\Loader;
 class CacheManageEnum
 {
     /**
+     * 平台类型
+     * @var integer
+     */
+    const PLATFORM_CLASS_1 = 1;
+    const PLATFORM_CLASS_2 = 2;
+    const PLATFORM_CLASS_3 = 3;
+    const PLATFORM_CLASS_4 = 4;
+    const PLATFORM_CLASS_5 = 5;
+    const PLATFORM_CLASS_6 = 6;
+    const PLATFORM_CLASS_ARR = [
+        self::PLATFORM_CLASS_1 => 'PC官网',
+        self::PLATFORM_CLASS_2 => 'WAP',
+        self::PLATFORM_CLASS_3 => 'APP(IOS)',
+        self::PLATFORM_CLASS_4 => 'APP(android)',
+        self::PLATFORM_CLASS_5 => '小程序',
+        self::PLATFORM_CLASS_6 => 'PC站ipr',
+    ];
+
+    /**
      * 数据类型一级
      * @var integer
      */

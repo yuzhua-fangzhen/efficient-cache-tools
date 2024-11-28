@@ -3,6 +3,8 @@
 
 namespace Yuzhua\EfficientCacheTools\Method;
 
+use Yuzhua\EfficientCacheTools\Loader\CacheManageEnum;
+use function Yuzhua\EfficientCacheTools\Loader\getDomain;
 use function Yuzhua\EfficientCacheTools\Loader\getPageRoute;
 
 class MainCacheManage
@@ -25,30 +27,31 @@ class MainCacheManage
      */
     public $fileCacheService = null;
 
-    public function __construct(
-        Redis $redisCacheService,
-        File $fileCacheService
-    )
+    public function __construct()
     {
         $this->config = [];
 
     }
 
-    public function getList($page = 1,$perPage = 10)
-    {
-
+    public static function getCacheDirver($driverType){
+        switch ($driverType){
+            case CacheManageEnum::DRIVER_TYPE_1:
+                return new Redis();
+            case CacheManageEnum::DRIVER_TYPE_2:
+                return new File();
+            case CacheManageEnum::DRIVER_TYPE_3:
+                return new Memcached();
+            default :
+                return new Redis();
+        }
     }
-
-    public function delete(){
-
-    }
-
+    
     public static function makeParamsForQueue(array $params):string
     {
-        //$params['domain'] =  getDomain();
-        $params['domain'] =  $_SERVER['HTTP_HOST'];
+        $params['valid_time'] = isset($params['valid_time']) ? $params['valid_time'] : 0;
+        $params['domain'] =  getDomain();
         $params['page_route'] = getPageRoute();
-        $params['expire_time'] = time() + (intval($params['valid_time']) ?? 0);
+        $params['expire_time'] = time() + intval($params['valid_time']);
         return json_encode($params,JSON_UNESCAPED_UNICODE);
     }
 }

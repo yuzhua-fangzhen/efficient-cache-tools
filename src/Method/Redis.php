@@ -8,11 +8,17 @@ use Yuzhua\EfficientCacheTools\AbstractManage;
 
 class Redis extends AbstractManage
 {
-    public function store(){
+    public function clear($data,$cacheConfig)
+    {
+        if(isset($cacheConfig['redis']) && !empty($cacheConfig['redis'])){
+            $redisConfig = $cacheConfig['redis'];
 
-    }
-
-    public function delete(){
-
+            $redis = new \Redis();
+            $redis->connect($redisConfig['host'], $redisConfig['port']);
+            isset($redisConfig['password']) && $redis->auth($redisConfig['password']);
+            isset($redisConfig['database']) && $redis->select($redisConfig['database']);
+            
+            $redis->del($data['cache_name']);
+        }
     }
 }

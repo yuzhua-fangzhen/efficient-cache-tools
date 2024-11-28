@@ -58,12 +58,13 @@ class QueueProducer
             'port'  =>  $config['port'],
             'login' =>  $config['user'],
             'password'  =>  $config['password'],
-            'heartbeat' => $config['heartbeat'] ?? $this->heartbeat,
+            'heartbeat' => isset($config['heartbeat']) ? $config['heartbeat'] : $this->heartbeat,
             'queue'   => 'operation_center.client_cache_manage_product.sync.que',
             'ex_name' => 'operation_center.client_cache_manage.dir.ex',
-            'vhost'   => $config['vhost'] ?? 'operation_center',
-            'routing_key' => $config['routing_key'] ?? ''
+            'vhost'   => isset($config['vhost']) ? $config['vhost'] : 'operation_center',
+            'routing_key' => isset($config['routing_key']) ? $config['routing_key'] : '',
         ];
+
         return $this->initialize();
     }
 

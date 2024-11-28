@@ -6,7 +6,7 @@
         "psr-4": {
             "Yuzhua\\EfficientCacheTools\\": "src/"
         },
-        "files": [ "src/CacheManage/Loader/functions.php" ]
+        "files": [ "src/Loader/functions.php" ]
     },
     "require": {
         "php": ">=5.6"

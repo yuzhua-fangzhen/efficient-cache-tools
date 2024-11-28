@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Yuzhua\EfficientCacheTools\CacheManage\Loader;
+namespace Yuzhua\EfficientCacheTools\Loader;
 
 
 class CacheManageEnum
@@ -62,10 +62,12 @@ class CacheManageEnum
     const DRIVER_TYPE_1 = 1;
     const DRIVER_TYPE_2 = 2;
     const DRIVER_TYPE_3 = 3;
+    const DRIVER_TYPE_4 = 4;
     const DRIVER_TYPE_ = [
         self::DRIVER_TYPE_1 => 'redis',
         self::DRIVER_TYPE_2 => 'file',
         self::DRIVER_TYPE_3 => 'memcached',
+        self::DRIVER_TYPE_4 => 'mysql',
     ];
 
     /**

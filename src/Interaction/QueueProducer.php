@@ -1,6 +1,6 @@
 <?php
 
-namespace Yuzhua\EfficientCacheTools\CacheManage\Interaction;
+namespace Yuzhua\EfficientCacheTools\Interaction;
 
 use http\Exception\BadConversionException;
 
@@ -44,15 +44,23 @@ class QueueProducer
     private $heartbeat = 180;
 
     public function __construct($config){
-        $queueConfig = config('rabbitmq');
+
+        if(!isset($config['host']) || empty($config['host'])
+        || !isset($config['host']) || empty($config['host'])
+        || !isset($config['host']) || empty($config['host'])
+        || !isset($config['host']) || empty($config['host'])
+        ){
+            throw new \Exception("缺少运营中台MQ连接配置");
+        }
+
         $this->config = [
-            'host'  =>  $config['host'] ?? $queueConfig['host'],
-            'port'  =>  $config['port'] ?? $queueConfig['port'],
-            'login' =>  $config['user'] ?? $queueConfig['user'],
-            'password'  =>  $config['password'] ?? $queueConfig['password'],
+            'host'  =>  $config['host'],
+            'port'  =>  $config['port'],
+            'login' =>  $config['user'],
+            'password'  =>  $config['password'],
             'heartbeat' => $config['heartbeat'] ?? $this->heartbeat,
-            'queue'   => $config['queue'],
-            'ex_name' => $config['ex_name'],
+            'queue'   => 'operation_center.client_cache_manage_product.sync.que',
+            'ex_name' => 'operation_center.client_cache_manage.dir.ex',
             'vhost'   => $config['vhost'] ?? 'operation_center',
             'routing_key' => $config['routing_key'] ?? ''
         ];

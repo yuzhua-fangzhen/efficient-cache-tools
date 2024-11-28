@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Yuzhua\EfficientCacheTools\CacheManage\Method;
+namespace Yuzhua\EfficientCacheTools\Method;
 
-use function Yuzhua\EfficientCacheTools\CacheManage\Loader\getPageRoute;
+use function Yuzhua\EfficientCacheTools\Loader\getPageRoute;
 
 class MainCacheManage
 {
@@ -43,8 +43,12 @@ class MainCacheManage
 
     }
 
-    public static function getPageRoute()
+    public static function makeParamsForQueue(array $params):string
     {
-        return getPageRoute();
+        //$params['domain'] =  getDomain();
+        $params['domain'] =  $_SERVER['HTTP_HOST'];
+        $params['page_route'] = getPageRoute();
+        $params['expire_time'] = time() + (intval($params['valid_time']) ?? 0);
+        return json_encode($params,JSON_UNESCAPED_UNICODE);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Yuzhua\EfficientCacheTools\CacheManage\Method;
+namespace Yuzhua\EfficientCacheTools\Method;
 
 
 

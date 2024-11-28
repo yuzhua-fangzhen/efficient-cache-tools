@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Yuzhua\EfficientCacheTools\CacheManage;
+namespace Yuzhua\EfficientCacheTools;
 
 
 abstract class AbstractManage

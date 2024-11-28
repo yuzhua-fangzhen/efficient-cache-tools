@@ -1,10 +1,10 @@
 <?php
 
-namespace Yuzhua\EfficientCacheTools\CacheManage\Method;
+namespace Yuzhua\EfficientCacheTools\Method;
 
 
 
-use Yuzhua\EfficientCacheTools\CacheManage\AbstractManage;
+use Yuzhua\EfficientCacheTools\AbstractManage;
 
 class Redis extends AbstractManage
 {

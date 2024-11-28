@@ -1,6 +1,6 @@
 <?php
 
-namespace Yuzhua\EfficientCacheTools\CacheManage\Loader;
+namespace Yuzhua\EfficientCacheTools\Loader;
 
 if (!\function_exists('Yuzhua\EfficientCacheTools\CacheManage\Loader\getCacheName')) {
     function getCacheName()
@@ -16,6 +16,12 @@ if (!\function_exists('Yuzhua\EfficientCacheTools\CacheManage\Loader\getPageRout
         $requestUri = $_SERVER['REQUEST_URI'];
         $relativePath = str_replace($scriptName, '', $requestUri);
         return $relativePath;
+    }
+}
+if (!\function_exists('Yuzhua\EfficientCacheTools\CacheManage\Loader\getDomain')) {
+    function getDomain()
+    {
+        return $_SERVER['HTTP_HOST'];
     }
 }
 

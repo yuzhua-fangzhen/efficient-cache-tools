@@ -2,13 +2,6 @@
 
 namespace Yuzhua\EfficientCacheTools\Loader;
 
-if (!\function_exists('Yuzhua\EfficientCacheTools\Loader\getCacheName')) {
-    function getCacheName()
-    {
-
-    }
-}
-
 if (!\function_exists('Yuzhua\EfficientCacheTools\Loader\getPageRoute')) {
     function getPageRoute()
     {

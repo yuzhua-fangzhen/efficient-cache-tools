@@ -63,7 +63,7 @@ extra_info  | 扩展信息 | 自定义,无特殊情况传入请求缓存中台�
         ]);
     }
     
-    #第二步:调用MainCacheManage类的makeParamsForQueue方法，传入定义好的参数,并推送消息
+    #第二步:调用MainCacheManage类的makeParamsForQueue方法(强制要求)，传入定义好的参数,并推送消息
     use Yuzhua\EfficientCacheTools\Loader\CacheManageEnum;
     use Yuzhua\EfficientCacheTools\Method\MainCacheManage;
  
@@ -83,7 +83,7 @@ extra_info  | 扩展信息 | 自定义,无特殊情况传入请求缓存中台�
                 $banner = array_slice($banner,0,10);
                 Jaeager::make()->redisSetex($cache_name,600,serialize($banner),false);
                 
-                //此部分为对接运营中台开始
+                //对接运营中台开始
                 $cacheMessage = MainCacheManage::makeParamsForQueue([
                     'project' => 3,
                     'platform_class' => $platform_class,
@@ -100,7 +100,7 @@ extra_info  | 扩展信息 | 自定义,无特殊情况传入请求缓存中台�
                     'extra_info' => ['搜索条件' => $params],
                 ]);
                 operationQueue()->push($cacheMessage);
-                //此部分为对接运营中台结束
+                //对接运营中台结束
             }else{
                 $banner = [];
             }

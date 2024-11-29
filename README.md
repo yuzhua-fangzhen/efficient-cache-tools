@@ -113,10 +113,12 @@ extra_info  | 扩展信息 | 自定义,无特殊情况传入请求缓存中台�
 ```angular2html
   当前包里只处理了清除缓存逻辑,后续继续拓展
 ```
+
 ### 使用说明
 ```angular2html
   新增守护进程,代码示例如下
 ```
+
 ```php
 <?php
     namespace App\Console\Commands\Queue;

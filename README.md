@@ -27,21 +27,21 @@ composer require yuzhua/efficient-cache-tools dev-main
 
 ## 前台生成缓存时推送运营中台消费队列参数说明
   
-参数 | 描述 | 备注 | 是否必填 | 示例 
-:---: | :---: | :---: | :---: | :---:
-project | 品牌ID | | 是 | 3
-platform_class | 平台分类 | 见CacheManageEnum类枚举 | 是 | 1
-page_title | 首页标题 | 自定义| 是 | 商标列表页 
-data_type_one | 数据类型一级 | 见CacheManageEnum类枚举 | 是 | 1
-data_type_two | 数据类型二级 | 见CacheManageEnum类枚举 | 是 | 1
-center_slug | 运营中台标识 | 非必填 | 否 | home-braner
-op_conn_status | 是否对接运营中台 | 见CacheManageEnum类枚举 | 是 | 1
-driver_type | 缓存驱动类型 | 见CacheManageEnum类枚举 | 是 | 1
-cache_type  | 缓存类型 | 见CacheManageEnum类枚举 | 是 | 1
-cache_name  | 缓存名称 | 必须与项目操作的换名对应 | 是 | mh:getBanner1
-cache_data  | 缓存内容 | 内容为运营中台接口的返回值 | 是 | 
-valid_time  | 缓存时间 | 单位(秒) | 是 | 600
-extra_info  | 扩展信息 | 自定义,无特殊情况传入请求缓存中台的接口入参 | 否 |
+参数 | 描述 | 备注 | 类型 | 是否必填 | 示例 
+:---: | :---: | :---: | :---: | :---: | :---:
+project | 品牌ID | integer | 是 | 3
+platform_class | 平台分类 | integer | 见CacheManageEnum类枚举 | 是 | 1
+page_title | 首页标题 | string | 自定义 | 是 | 商标列表页 
+data_type_one | 数据类型一级 | integer | 见CacheManageEnum类枚举 | 是 | 1
+data_type_two | 数据类型二级 | integer | 见CacheManageEnum类枚举 | 是 | 1
+center_slug | 运营中台标识 | string | 非必填 | 否 | home-braner
+op_conn_status | 是否对接运营中台 | integer | 见CacheManageEnum类枚举 | 是 | 1
+driver_type | 缓存驱动类型 | integer | 见CacheManageEnum类枚举 | 是 | 1
+cache_type  | 缓存类型 | integer | 见CacheManageEnum类枚举 | 是 | 1
+cache_name  | 缓存名称 | string | 必须与项目操作的换名对应 | 是 | mh:getBanner1
+cache_data  | 缓存内容 | array | 内容为运营中台接口的返回值 | 是 | 
+valid_time  | 缓存时间 | integer | 单位(秒) | 是 | 600
+extra_info  | 扩展信息 | array | 自定义,无特殊情况传入请求缓存中台的接口入参 | 否 |
 
 ```angular2html
   以下示例均以laravel框架进行,后续各平台对接自行调整

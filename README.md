@@ -51,19 +51,24 @@ extra_info  | 扩展信息 | array | 自定义,无特殊情况传入请求运营
 ```php
 <?php
     
-    #第一步:公共方法实例化队列生产者,入参当前项目的RABBITMQ配置,方便后续调用
+    #第一步:公共方法实例化队列生产者,入参当前项目的RABBITMQ配置,方法入参组装好的缓存消息
+    #ps:强制要求这里的消息推送使用try catch捕获异常,缓存消息没同步到后续可以根据错误日志排查,前台崩了问题就大了
     use Yuzhua\EfficientCacheTools\Interaction\QueueProducer;
     
-    function operationQueue(){
-        return new QueueProducer([
-            'host' => env('RABBITMQ_HOST', 'xx'),
-            'port' => env('RABBITMQ_PORT', 'xxx'),
-            'user' => env('RABBITMQ_USER', 'xxx'),
-            'password' => env('RABBITMQ_PASSWORD', 'xxx'),
-        ]);
+    function operationQueue($cacheMessage){
+        try{
+            (new QueueProducer([
+                'host' => env('RABBITMQ_HOST', 'xx'),
+                'port' => env('RABBITMQ_PORT', 'xxx'),
+                'user' => env('RABBITMQ_USER', 'xxx'),
+                'password' => env('RABBITMQ_PASSWORD', 'xxx'),
+            ]))->push($cacheMessage);
+        }catch(\Exception $exception){
+            logger()->info($exception->getMessage());
+        }
     }
     
-    #第二步:调用MainCacheManage类的makeParamsForQueue方法(强制要求)，传入定义好的参数,并推送消息
+    #第二步:调用MainCacheManage类的makeParamsForQueue方法(强制要求)，调用第一步的方法并传参组装好的消息数据
     use Yuzhua\EfficientCacheTools\Loader\CacheManageEnum;
     use Yuzhua\EfficientCacheTools\Method\MainCacheManage;
  

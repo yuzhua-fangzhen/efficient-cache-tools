@@ -41,7 +41,7 @@ cache_type  | 缓存类型 | integer | 见CacheManageEnum类枚举 | 是 | 1
 cache_name  | 缓存名称 | string | 必须与项目操作的换名对应 | 是 | mh:getBanner1
 cache_data  | 缓存内容 | array | 内容为运营中台接口的返回值 | 是 | 
 valid_time  | 缓存时间 | integer | 单位(秒) | 是 | 600
-extra_info  | 扩展信息 | array | 自定义,无特殊情况传入请求缓存中台的接口入参 | 否 |
+extra_info  | 扩展信息 | array | 自定义,无特殊情况传入请求运营中台的接口入参 | 否 |
 
 ```angular2html
   以下示例均以laravel框架进行,后续各平台对接自行调整
@@ -160,11 +160,7 @@ extra_info  | 扩展信息 | array | 自定义,无特殊情况传入请求缓存
                     'database' => env('REDIS_DATABASE', 1),
                 ]
             ];
-            //实例化QueueConsumer类并入参
-            //队列配置
-            //项目用到的各缓存配置
-            //品牌ID
-            //平台分类    
+            //实例化QueueConsumer类并入参;队列配置;项目用到的各缓存配置;品牌ID;平台分类    
             (new QueueConsumer($queueConfig,$cacheConfig,3,CacheManageEnum::PLATFORM_CLASS_1))->consume();
         }
     } 

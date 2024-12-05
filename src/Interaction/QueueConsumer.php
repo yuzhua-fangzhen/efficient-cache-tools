@@ -21,6 +21,11 @@ class QueueConsumer
     /**
      * @var null
      */
+    private $type = null;
+
+    /**
+     * @var null
+     */
     private $platformClass = null;
 
     /**
@@ -28,12 +33,13 @@ class QueueConsumer
      */
     private $cacheConfig = null;
 
-    public function __construct($queueConfig,$cacheConfig,$project,$platformClass){
+    public function __construct($queueConfig,$cacheConfig,$project,$type,$platformClass){
         set_time_limit(0);
-        $queueConfig['queueName'] = sprintf('operation_center.client_cache_manage_clear_project_%s_platform_class_%s.sync.que',$project,$platformClass);
+        $queueConfig['queueName'] = sprintf('operation_center.client_cache_manage_clear_project_%s_type_%s_platform_class_%s.sync.que',$project,$type,$platformClass);
         $this->queueConfig = $queueConfig;
         $this->cacheConfig = $cacheConfig;
         $this->project = $project;
+        $this->type = $type;
         $this->platformClass = $platformClass;
     }
 
@@ -73,7 +79,7 @@ class QueueConsumer
             $data = json_decode($data,true);
         }
 
-        if($data['project'] == $this->project && $data['platform_class'] == $this->platformClass){
+        if($data['project'] == $this->project && $data['platform_class'] == $this->platformClass && $this->type == $data['type']){
             MainCacheManage::getCacheDirver($data['driver_type'])->clear($data,$this->cacheConfig);
         }
 
